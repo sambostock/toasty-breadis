@@ -86,29 +86,4 @@ class BreadisTest < ActiveSupport::TestCase
   test '.any? returns false if there are no stored keys' do
     refute_predicate Breadis, :any?
   end
-
-  private
-
-  def store(hash)
-    breadis_store.transaction do
-      hash.each do |key, value|
-        breadis_store[key] = value
-      end
-    end
-  end
-
-  def assert_stored(hash)
-    breadis_store.transaction(true) do
-      hash.each do |key, expected_value|
-        stored_value = breadis_store[key]
-        message = "The stored value for #{key.inspect} did not match the expected value."
-
-        if expected_value.nil?
-          assert_nil stored_value, message
-        else
-          assert_equal expected_value, stored_value, message
-        end
-      end
-    end
-  end
 end
