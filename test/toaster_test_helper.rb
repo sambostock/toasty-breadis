@@ -2,11 +2,13 @@
 
 module ToasterTestHelper
   def self.included(base)
-    base.class_eval do
-      def self.each_orderable_toppings
-        (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
-          Toaster::SERVED_TOPPINGS.permutation(length)
-        end
+    base.extend ClassMethods
+  end
+
+  module ClassMethods
+    def each_orderable_toppings
+      (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
+        Toaster::SERVED_TOPPINGS.permutation(length)
       end
     end
   end
