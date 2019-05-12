@@ -6,7 +6,7 @@ module ToasterTestHelper
   extend ActiveSupport::Concern
   include BreadisTestHelper
 
-  module ClassMethods
+  class_methods do
     def each_orderable_toppings
       (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
         Toaster::SERVED_TOPPINGS.permutation(length)
