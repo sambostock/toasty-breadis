@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require 'breadis_test_helper'
+
 module ToasterTestHelper
+  include BreadisTestHelper
+
   def self.included(base)
     base.extend ClassMethods
   end

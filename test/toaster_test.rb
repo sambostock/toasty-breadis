@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'breadis_test_helper'
 require 'toaster_test_helper'
 require 'toaster'
 
 class ToasterTest < ActiveSupport::TestCase
-  include BreadisTestHelper
   include ToasterTestHelper
 
   each_orderable_toppings do |toppings|
