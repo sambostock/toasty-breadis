@@ -9,12 +9,6 @@ class ToasterTest < ActiveSupport::TestCase
   include BreadisTestHelper
   include ToasterTestHelper
 
-  def self.each_orderable_toppings
-    (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
-      Toaster::SERVED_TOPPINGS.permutation(length)
-    end
-  end
-
   each_orderable_toppings do |toppings|
     test "#order_toast accepts #{toppings.inspect} as toppings" do
       toaster.order_toast(

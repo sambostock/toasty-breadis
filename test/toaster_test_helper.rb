@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module ToasterTestHelper
+  def self.each_orderable_toppings
+    (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
+      Toaster::SERVED_TOPPINGS.permutation(length)
+    end
+  end
+
   private
 
   def place(order_or_orders)
