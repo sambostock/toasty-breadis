@@ -4,12 +4,16 @@ require 'fileutils'
 module BreadisTestHelper
   BREADIS_PATH = 'breadis.pstore'
 
-  setup do
-    wipe_breadis!
-  end
+  def self.included(base)
+    base.class_eval do
+      setup do
+        wipe_breadis!
+      end
 
-  teardown do
-    wipe_breadis!
+      teardown do
+        wipe_breadis!
+      end
+    end
   end
 
   private
