@@ -2,10 +2,12 @@
 
 require 'test_helper'
 require 'breadis_test_helper'
+require 'toaster_test_helper'
 require 'toaster'
 
 class ToasterTest < ActiveSupport::TestCase
   include BreadisTestHelper
+  include ToasterTestHelper
 
   def self.each_orderable_toppings
     (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
@@ -128,35 +130,5 @@ class ToasterTest < ActiveSupport::TestCase
     remaining_orders = orders - [fulfilled_order]
 
     assert_placed remaining_orders
-  end
-
-  private
-
-  def place(order_or_orders)
-    orders = normalize_hashes(order_or_orders)
-
-    orders.each do |name:, toppings:|
-      store name => toppings
-    end
-  end
-
-  def assert_placed(order_or_orders)
-    orders = normalize_hashes(order_or_orders)
-
-    orders.each do |name:, toppings:|
-      assert_stored name => toppings
-    end
-  end
-
-  def normalize_hashes(hash_or_hashes)
-    if hash_or_hashes.is_a? Hash
-      [hash_or_hashes]
-    else
-      hash_or_hashes
-    end
-  end
-
-  def toaster
-    @toaster ||= Toaster.new
   end
 end
