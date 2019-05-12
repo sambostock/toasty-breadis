@@ -2,6 +2,8 @@
 require 'fileutils'
 
 module BreadisTestHelper
+  extend ActiveSupport::Concern
+
   BREADIS_PATH = 'breadis.pstore'
 
   def self.included(base)
