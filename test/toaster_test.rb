@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'fileutils'
+require 'breadis_test_helper'
 require 'toaster'
 
 class ToasterTest < ActiveSupport::TestCase
-  BREADIS_PATH = 'breadis.pstore'
-
-  setup do
-    wipe_breadis!
-  end
-
-  teardown do
-    wipe_breadis!
-  end
+  include BreadisTestHelper
 
   def self.each_orderable_toppings
     (0..Toaster::SERVED_TOPPINGS.length).flat_map do |length|
@@ -189,13 +181,5 @@ class ToasterTest < ActiveSupport::TestCase
         end
       end
     end
-  end
-
-  def wipe_breadis!
-    FileUtils.remove_file(breadis_store.path) if File.exist?(breadis_store.path)
-  end
-
-  def breadis_store
-    @breadis_store ||= PStore.new('breadis.pstore')
   end
 end

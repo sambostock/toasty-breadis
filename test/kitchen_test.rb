@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'fileutils'
+require 'breadis_test_helper'
 require 'toaster'
 
 class KitchenTest < ActiveSupport::TestCase
-  BREADIS_PATH = 'breadis.pstore'
-
-  setup do
-    wipe_breadis!
-  end
-
-  teardown do
-    wipe_breadis!
-  end
+  include BreadisTestHelper
 
   test 'placing and serving a couple orders works' do
     orders = [
@@ -51,15 +43,5 @@ class KitchenTest < ActiveSupport::TestCase
     refute_predicate toasters.sample, :orders_pending?
 
     assert_empty orders - fulfilled_orders
-  end
-
-  private
-
-  def wipe_breadis!
-    FileUtils.remove_file(breadis_store.path) if File.exist?(breadis_store.path)
-  end
-
-  def breadis_store
-    @breadis_store ||= PStore.new('breadis.pstore')
   end
 end

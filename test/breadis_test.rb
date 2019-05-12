@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'fileutils'
+require 'breadis_test_helper'
 require 'breadis'
 
 class BreadisTest < ActiveSupport::TestCase
-  BREADIS_PATH = 'breadis.pstore'
-
-  setup do
-    wipe_breadis!
-  end
-
-  teardown do
-    wipe_breadis!
-  end
+  include BreadisTestHelper
 
   test '.[] reads a key from the store' do
     expected = 123
@@ -118,13 +110,5 @@ class BreadisTest < ActiveSupport::TestCase
         end
       end
     end
-  end
-
-  def wipe_breadis!
-    FileUtils.remove_file(breadis_store.path) if File.exist?(breadis_store.path)
-  end
-
-  def breadis_store
-    @breadis_store ||= PStore.new('breadis.pstore')
   end
 end
