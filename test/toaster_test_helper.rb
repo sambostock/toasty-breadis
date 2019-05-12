@@ -3,6 +3,7 @@
 require 'breadis_test_helper'
 
 module ToasterTestHelper
+  extend ActiveSupport::Concern
   include BreadisTestHelper
 
   def self.included(base)
