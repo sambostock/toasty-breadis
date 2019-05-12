@@ -7,3 +7,6 @@ up:
     - openssl
   - ruby: 2.6.3
   - bundler
+
+commands:
+  test: bin/test
