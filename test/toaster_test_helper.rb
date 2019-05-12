@@ -6,8 +6,8 @@ module ToasterTestHelper
   extend ActiveSupport::Concern
   include BreadisTestHelper
 
-  def self.included(base)
-    base.extend ClassMethods
+  included do
+    extend ClassMethods
   end
 
   module ClassMethods

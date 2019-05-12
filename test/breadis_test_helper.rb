@@ -6,15 +6,13 @@ module BreadisTestHelper
 
   BREADIS_PATH = 'breadis.pstore'
 
-  def self.included(base)
-    base.class_eval do
-      setup do
-        wipe_breadis!
-      end
+  included do
+    setup do
+      wipe_breadis!
+    end
 
-      teardown do
-        wipe_breadis!
-      end
+    teardown do
+      wipe_breadis!
     end
   end
 
